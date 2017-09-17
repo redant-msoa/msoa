@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>register-console</display-name>
+
+	<!-- 加载spring容器 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/spring/applicationContext-*.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 配置springmvc的dispatchServlet的处理类 -->
+	<servlet>
+		<servlet-name>srpingDispatherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 配置DispatchServlet的初始化参数,加载配置文件(配置处理映射器,适配器)springmvc配置文件的位置和名称 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/springmvc.xml</param-value>
+		</init-param>
+		<!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为 -->
+		<!--[<servlet-name>]-servlet.xml，如SpringMVC-servlet.xml -->
+		<!-- <init-param> <param-name>contextConfigLocation</param-name> <param-value>/WEB-INF/SpringMVC-servlet.xml</param-value> 
+			</init-param> -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+
+	<!-- 配置springmvc的DispathServlet的映射匹配URL -->
+	<servlet-mapping>
+		<servlet-name>srpingDispatherServlet</servlet-name>
+		<!-- 第一种: *.action，访问以.action结尾 由DispatcherServlet进行解析 第二种: /. 所有访问的地址都由DispatcherServlet进行解析，对于静态文件的解析需要配置不让DispatcherServlet进行解析 
+			第三种: /* 这种配置不对，使用这种配置，最终要转发到一个jsp页面时,仍然会由DispatcherServlet解析jsp地址，不能根据jsp页面找到handler，会报错 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.svg</url-pattern>
+		<url-pattern>*.eot</url-pattern>
+		<url-pattern>*.ttf</url-pattern>
+		<url-pattern>*.woff</url-pattern>
+	</servlet-mapping>
+</web-app>

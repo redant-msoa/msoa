@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="msoa.register.atom" />
+
+	<bean id="server" class="msoa.register.atom.HTTPServer"
+		init-method="start" destroy-method="stop">
+		<property name="name" value="atom" />
+		<property name="port" value="8080" />
+	</bean>
+
+
+	<mvc:interceptors>
+		<mvc:interceptor><!--配置局部拦截器，需要满足下列路径条件 -->
+			<mvc:exclude-mapping path="/" /><!--注销 -->
+			<bean class="msoa.register.atom.web.LoginInterceptor" /><!--自定义拦截器注册 -->
+		</mvc:interceptor>
+		<!-- 我们可以直接在者注册自定义拦截器Bean来配置全局拦截器，会对所有请求拦截 -->
+	</mvc:interceptors>
+
+</beans>  

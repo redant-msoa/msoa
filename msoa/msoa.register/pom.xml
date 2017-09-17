@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.redant</groupId>
+    <artifactId>msoa</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>msoa.register</artifactId>
+  <packaging>pom</packaging>
+  
+  <properties>
+  	<jetty.v>9.4.6.v20170531</jetty.v>
+  	<spring.v>4.3.10.RELEASE</spring.v>
+  	<junt.v>3.8.1</junt.v>
+  </properties>
+  
+  <modules>
+  	<module>msoa.register.manager</module>
+  	<module>msoa.register.atom</module>
+  	<module>msoa.register.molecule</module>
+  </modules>
+</project>
